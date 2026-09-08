@@ -96,6 +96,62 @@
         box-sizing: border-box;
         margin-top: 5px;
     }
+
+    .parameter-group {
+        margin-bottom: 15px;
+    }
+
+    .parameter-group h4 {
+        margin-bottom: 5px;
+    }
+
+    .btn-group input[type="radio"] {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+        pointer-events: none;
+    }
+
+    .btn-group .btn {
+        border-radius: 0;
+    }
+
+    .btn-group .btn:first-of-type {
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+    }
+
+    .btn-group .btn:last-of-type {
+        border-top-right-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+
+    .btn-group input[type="radio"]:checked + label.btn {
+        background-color: #1f77b4;
+        color: white;
+        border-color: #1f77b4;
+    }
+
+    .btn-primary {
+        background-color: #1f77b4;
+        color: white;
+        border-color: #1f77b4;
+    }
+
+    .parameters-line {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 15px 0;
+        min-width: 900px;
+        flex-wrap: nowrap;
+    }
+
+    .parameter-item {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -116,7 +172,7 @@
       <p>Experiment code is available in <a href="https://github.com/TheoChasleCauchy/paperSobolevMorphingMetric">this GitHub repository</a>.</p>
     </div>
 
-      <!-- Trajectories Examples Section -->
+    <!-- Trajectories Examples Section -->
     <div class="container mt-5">
         <h2>Trajectories Examples</h2>
 
@@ -193,6 +249,64 @@
         </div>
     </div>
 
+
+    <div class="container mt-5">
+        <h2>Defined Hypercube Samples</h2>
+        <h3>Parameters</h3>
+        <div class="parameters-line">
+            <div class="parameter-item">
+            <h4>log(omega)</h4>
+            <div class="btn-group">
+                <input type="radio" name="logOmega" id="logOmega-min" value="0" checked>
+                <label for="logOmega-min" class="btn btn-outline-primary">min</label>
+                <input type="radio" name="logOmega" id="logOmega-max" value="1">
+                <label for="logOmega-max" class="btn btn-outline-primary">max</label>
+            </div>
+            </div>
+            <div class="parameter-item">
+            <h4>tau</h4>
+            <div class="btn-group">
+                <input type="radio" name="tau" id="tau-min" value="0" checked>
+                <label for="tau-min" class="btn btn-outline-primary">min</label>
+                <input type="radio" name="tau" id="tau-max" value="1">
+                <label for="tau-max" class="btn btn-outline-primary">max</label>
+            </div>
+            </div>
+            <div class="parameter-item">
+            <h4>log(p)</h4>
+            <div class="btn-group">
+                <input type="radio" name="logP" id="logP-min" value="0" checked>
+                <label for="logP-min" class="btn btn-outline-primary">min</label>
+                <input type="radio" name="logP" id="logP-max" value="1">
+                <label for="logP-max" class="btn btn-outline-primary">max</label>
+            </div>
+            </div>
+            <div class="parameter-item">
+            <h4>log(D)</h4>
+            <div class="btn-group">
+                <input type="radio" name="logD" id="logD-min" value="0" checked>
+                <label for="logD-min" class="btn btn-outline-primary">min</label>
+                <input type="radio" name="logD" id="logD-max" value="1">
+                <label for="logD-max" class="btn btn-outline-primary">max</label>
+            </div>
+            </div>
+            <div class="parameter-item">
+            <h4>alpha</h4>
+            <div class="btn-group">
+                <input type="radio" name="alpha" id="alpha-min" value="0" checked>
+                <label for="alpha-min" class="btn btn-outline-primary">min</label>
+                <input type="radio" name="alpha" id="alpha-max" value="1">
+                <label for="alpha-max" class="btn btn-outline-primary">max</label>
+            </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col text-center">
+            <button id="playHypercube" class="btn btn-primary">Play</button>
+            </div>
+        </div>
+    </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.audio-circle').forEach(function(circle) {
@@ -206,6 +320,19 @@
             }
         });
         });
+    });
+
+    document.getElementById('playHypercube').addEventListener('click', function() {
+        const params = ['logOmega', 'tau', 'logP', 'logD', 'alpha'];
+        let filename = 'audios/audio_extrema';
+        params.forEach(param => {
+            const selected = document.querySelector(`input[name="${param}"]:checked`);
+            filename += `_${param}_${selected.value}`;
+        });
+        filename += '.mp3';
+        console.log(filename);
+        const audio = new Audio(filename);
+        audio.play().catch(e => console.error('Error playing audio:', e));
     });
     </script>
 
