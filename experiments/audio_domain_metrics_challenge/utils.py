@@ -60,6 +60,7 @@ def compute_nuc_intermediate_points(num_intermediate_samples, parameters_couples
 
 
 def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_intermediate_samples,
+                                           anchors_couples_parameters_filepath,
                                            ref_points_embeddings_dir,
                                            random_points_embeddings_dir,
                                            trajectories_embeddings_dir,
@@ -72,6 +73,7 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
     Args:
         embedding_model: Name identifier for the embedding model
         num_intermediate_samples: Number of intermediate points between each S-T couple
+        anchors_couples_parameters_filepath: Path to the CSV file containing anchor couples parameters
         ref_points_embeddings_dir: Base directory containing embedding points for each couple
         random_points_embeddings_dir: Base directory containing random embedding points
         trajectories_embeddings_dir: Base directory to save generated trajectory embeddings
@@ -82,11 +84,9 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
     """
 
     import shutil
-    import csv
 
     # Set up model-specific subdirectories
     random_points_embeddings_dir = os.path.join(random_points_embeddings_dir, embedding_model)
-    trajectories_embeddings_dir = os.path.join(trajectories_embeddings_dir, embedding_model)
     results_dir = os.path.join(results_dir, embedding_model)
     os.makedirs(trajectories_embeddings_dir, exist_ok=True)
     os.makedirs(results_dir, exist_ok=True)
@@ -139,7 +139,7 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
         return np.degrees(np.arccos(cos_angle))
 
     # Load couples (A, B pairs) from CSV
-    couples = load_and_extract_couples(f"exp_embeddings_linearity/generated/thetas_couples.csv")
+    couples = load_and_extract_couples(anchors_couples_parameters_filepath)
 
     # Load all available random points for nearest-neighbor search
     random_points = load_random_points_from_csv(random_points_embeddings_dir)
@@ -149,9 +149,9 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
 
     for i_couple in tqdm(range(len(couples)), desc=f"Computing embeddings EQC trajectories"):
         # Copy endpoint S (I0) and T (I{num_intermediate_samples+1}) to trajectories directory
-        s_filepath = os.path.join(ref_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_AB_I0.npy")
+        s_filepath = os.path.join(ref_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_ST_I0.npy")
         shutil.copy(s_filepath, trajectories_embeddings_dir)
-        t_filepath = os.path.join(ref_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_AB_I{num_intermediate_samples+1}.npy")
+        t_filepath = os.path.join(ref_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_ST_I{num_intermediate_samples+1}.npy")
         shutil.copy(t_filepath, trajectories_embeddings_dir)
 
         # Load endpoint embeddings
@@ -167,25 +167,8 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
             intermediate_point_filepath = find_closest_point_from_circle(s, distance_from_s, random_points)
             shutil.copyfile(
                 intermediate_point_filepath,
-                os.path.join(trajectories_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_AB_I{i}.npy")
+                os.path.join(trajectories_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_ST_I{i}.npy")
             )
-
-            # Load the actual intermediate embedding to calculate deviation angle
-            intermediate_embedding = np.load(intermediate_point_filepath)
-            angle_deg = calculate_angle(s, t, intermediate_embedding)
-            angles_data.append({
-                'row_index': i_couple,
-                'intermediate_index': i,
-                'angle_degrees': angle_deg
-            })
-
-    # Save all angle measurements to CSV in the trajectories directory
-    angles_filepath = os.path.join(results_dir, 'intermediate_points_angles.csv')
-    with open(angles_filepath, 'w', newline='') as csvfile:
-        fieldnames = ['row_index', 'intermediate_index', 'angle_degrees']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(angles_data)
 
     return trajectories_embeddings_dir
 

@@ -80,7 +80,7 @@ def compute_sobolev_distances(embeddings_folder, results_dir, model_name, trajec
         for i_traj, trajectory in enumerate(tqdm(trajectories, desc="Computing sobolev distances", total=len(trajectories))):
             morph_embeddings = []
             for i_theta in range(len(trajectory)):
-                embedding = torch.tensor(np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_AB_I{i_theta}.npy")))
+                embedding = torch.tensor(np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_ST_I{i_theta}.npy")))
 
                 morph_embeddings.append(embedding)
 
@@ -114,7 +114,7 @@ def make_table(results_dir, models):
 
         for model_name in models:
             # Get metric value of null config
-            null_csv_path = os.path.join(results_dir, "null_trajectories", model_name, f"{model_name}_sobolev_dists_{k}_{p}.csv")
+            null_csv_path = os.path.join(results_dir, "results_null_trajectories", model_name, f"{model_name}_sobolev_dists_{k}_{p}.csv")
             if os.path.exists(null_csv_path):
                 with open(null_csv_path, "r") as csvfile:
                     reader = csv.reader(csvfile)
@@ -127,7 +127,7 @@ def make_table(results_dir, models):
                 raise FileNotFoundError(f"File not found: {null_csv_path}")
 
             # Get metric value
-            csv_path = os.path.join(results_dir, "ref_trajectories", model_name, f"{model_name}_sobolev_dists_{k}_{p}.csv")
+            csv_path = os.path.join(results_dir, "results_ref_trajectories", model_name, f"{model_name}_sobolev_dists_{k}_{p}.csv")
             with open(csv_path, "r") as csvfile:
                 reader = csv.reader(csvfile)
                 rows = list(reader)

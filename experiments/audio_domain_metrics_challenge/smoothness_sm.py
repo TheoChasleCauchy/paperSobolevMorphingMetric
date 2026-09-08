@@ -17,7 +17,7 @@ def mert_process_csv(trajectories: list[np.ndarray], embeddings_folder: str, mod
     for i_traj, trajectory in enumerate(tqdm(trajectories, desc="Computing Smoothness CDPAM", total=len(trajectories))):
         morph_embeddings = []
         for i_theta in range(len(trajectory)):
-            embedding = np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_AB_I{i_theta}.npy"))
+            embedding = np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_ST_I{i_theta}.npy"))
             embedding = torch.from_numpy(embedding).float()
             if embedding.dim() == 1:
                 embedding = embedding.unsqueeze(0)

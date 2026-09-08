@@ -7,10 +7,10 @@ def synthesize_audios_trajectories(trajectories, logscale, audio_dir):
     os.makedirs(audio_dir, exist_ok=True)
     for i_traj, trajectory in enumerate(tqdm(trajectories, desc="Synthesizing audios in " + audio_dir, total=len(trajectories))):
         for i_theta, theta in enumerate(trajectory):
-            if not os.path.exists(os.path.join(audio_dir, f"audio_row_{i_traj}_AB_I{i_theta}.wav")):
+            if not os.path.exists(os.path.join(audio_dir, f"audio_row_{i_traj}_ST_I{i_theta}.wav")):
                 x = ftm.rectangular_drum(theta, logscale, **ftm.constants).cpu()
                 x = x / max(x)
-                sf.write(os.path.join(audio_dir, f"audio_row_{i_traj}_AB_I{i_theta}.wav"), x, ftm.constants["sr"])
+                sf.write(os.path.join(audio_dir, f"audio_row_{i_traj}_ST_I{i_theta}.wav"), x, ftm.constants["sr"])
 
 
 def synthesize_audios_points(points_filename, logscale, audio_dir):

@@ -58,7 +58,7 @@ def main():
     trajectories = load_trajectories_from_csv(trajectories_path)
 
     ## Compute metrics
-    results_dir = f"data/results/null_trajectories/"
+    results_dir = f"data/results/results_null_trajectories/"
     os.makedirs(results_dir, exist_ok=True)
     model_name = "MERT_v1-330M"
     embeddings_dir = f"data/generated/embeddings/embeddings_null_trajectories/{model_name}"
@@ -95,7 +95,7 @@ def main():
     trajectories = load_trajectories_from_csv(trajectories_path)
 
     ## Compute metrics
-    results_dir = f"data/results/ref_trajectories/"
+    results_dir = f"data/results/results_ref_trajectories/"
     os.makedirs(results_dir, exist_ok=True)
 
     model_name = "MERT_v1-330M"
@@ -142,7 +142,7 @@ def main():
     embeddings_dir = "data/generated/embeddings/embeddings_nuc_trajectories"
     compute_trajectories_embeddings(models, trajectories, audio_dir=audio_dir, embeddings_dir=embeddings_dir)
 
-    results_dir = f"data/generated/results/results_nuc_trajectories/"
+    results_dir = f"data/results/results_nuc_trajectories/"
     model_name = "MERT_v1-330M"
     embeddings_dir = f"data/generated/embeddings/embeddings_nuc_trajectories/{model_name}"
     compute_sobolev_distances(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
@@ -193,14 +193,15 @@ def main():
         # Compute parameters trajectories
         trajectories_filepath = get_eqc_intermediate_embeddings_from_random_sampling(
             embedding_model=model_name, num_intermediate_samples=num_intermediate_samples,
+            anchors_couples_parameters_filepath="data/generated/parameters/parameters_anchors_couples.csv",
             ref_points_embeddings_dir=f"data/generated/embeddings/embeddings_ref_trajectories/{model_name}",
             random_points_embeddings_dir="data/generated/embeddings/embeddings_random_sampling",
             trajectories_embeddings_dir=f"data/generated/embeddings/embeddings_eqc_trajectories/{model_name}",
-            results_dir=f"data/generated/results/results_eqc_trajectories/{model_name}")
+            results_dir=f"data/results/results_eqc_trajectories/{model_name}")
         
         print(f"Loading eqc trajectories from {trajectories_filepath}")
 
-    results_dir = f"data/generated/results/results_eqc_trajectories/"
+    results_dir = f"data/results/results_eqc_trajectories/"
     model_name = "MERT_v1-330M"
     embeddings_dir = f"data/generated/embeddings/embeddings_eqc_trajectories/{model_name}"
     compute_sobolev_distances(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
@@ -225,7 +226,7 @@ def main():
     #                Make table              -
     # ----------------------------------------
 
-    make_table("data/generated/results/")
+    make_table("data/results/")
 
 if __name__ == "__main__":
     main()

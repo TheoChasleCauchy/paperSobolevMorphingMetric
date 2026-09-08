@@ -90,7 +90,7 @@ def compute_correspondence_sm(results_dir: str, model_name: str, trajectories: l
                 morph_audio_names = []
                 for i_theta in range(len(trajectory)):
                     # Load the audio files for each theta value
-                    morph_name = os.path.join(audios_or_embeddings_folder, f"audio_row_{i_traj}_AB_I{i_theta}.wav")
+                    morph_name = os.path.join(audios_or_embeddings_folder, f"audio_row_{i_traj}_ST_I{i_theta}.wav")
                     morph_audio_names.append(morph_name)
 
                 source_audio_name = morph_audio_names[0]
@@ -102,7 +102,7 @@ def compute_correspondence_sm(results_dir: str, model_name: str, trajectories: l
             case "MERT_v1-330M":
                 morph_embeddings = []
                 for i_theta in range(len(trajectory)):
-                    embedding = np.load(os.path.join(audios_or_embeddings_folder, f"embedding_{model_name}_row_{i_traj}_AB_I{i_theta}.npy"))
+                    embedding = np.load(os.path.join(audios_or_embeddings_folder, f"embedding_{model_name}_row_{i_traj}_ST_I{i_theta}.npy"))
                     morph_embeddings.append(embedding)
 
                 source = morph_embeddings[0]

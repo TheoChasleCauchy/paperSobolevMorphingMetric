@@ -114,18 +114,18 @@ def make_table(results_dir):
         
         return metrics_values
     
-    results_dir_linear = f"{results_dir}/experiment"
+    results_dir_linear = f"{results_dir}/results_ref_trajectories"
     linear_metrics_values = get_metrics_values(results_dir_linear)
-    results_dir_random = f"{results_dir}/random"
+    results_dir_random = f"{results_dir}/results_null_trajectories"
     random_metrics_values = get_metrics_values(results_dir_random)
         
-    results_dir_nuc = f"{results_dir}/nuc"
+    results_dir_nuc = f"{results_dir}/results_nuc_trajectories"
     nuc_metrics_values = get_metrics_values(results_dir_nuc)
-    results_dir_eqc = f"{results_dir}/emb_eqc" # f"{results_dir}/normalized_eqc" # f"{results_dir}/eqc"
+    results_dir_eqc = f"{results_dir}/results_eqc_trajectories" # f"{results_dir}/normalized_eqc" # f"{results_dir}/eqc"
     eqc_metrics_values = get_metrics_values(results_dir_eqc, no_audio=True)
 
     # Write the table to a CSV file
-    output_csv_path = os.path.join(results_dir, "metrics_std_table.csv")
+    output_csv_path = os.path.join(results_dir, "audio_domain_metrics_values_table.csv")
     with open(output_csv_path, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
 

@@ -24,7 +24,7 @@ def cdpam_process_csv(trajectories: list[np.ndarray], audios_folder: str):
         morph_audio_names = []
         for i_theta in range(len(trajectory)):
             # Load the audio files for each theta value
-            morph_name = os.path.join(audios_folder, f"audio_row_{i_traj}_AB_I{i_theta}.wav")
+            morph_name = os.path.join(audios_folder, f"audio_row_{i_traj}_ST_I{i_theta}.wav")
             morph_audio_names.append(morph_name)
 
         morphed_audios = []

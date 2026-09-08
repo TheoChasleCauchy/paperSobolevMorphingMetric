@@ -50,7 +50,7 @@ def main():
 
     ## 5. Compute sobolev distance
     print('Computing null trajectory sobolev distances to ideal trajectories.')
-    results_dir = f"data/results/null_trajectories/"
+    results_dir = f"data/results/results_null_trajectories/"
     os.makedirs(results_dir, exist_ok=True)
     for model_name in models:
         specific_model_embeddings_dir = os.path.join(embeddings_dir, model_name)
@@ -78,7 +78,7 @@ def main():
 
     ## 5. Compute sobolev distance
     print('Computing reference trajectory sobolev distances to ideal trajectories.')
-    results_dir = f"data/results/ref_trajectories/"
+    results_dir = f"data/results/results_ref_trajectories/"
     os.makedirs(results_dir, exist_ok=True)
     for model_name in models:
         specific_model_embeddings_dir = os.path.join(embeddings_dir, model_name)

@@ -39,7 +39,7 @@ def compute_smoothness_mf(results_dir: str, model_name: str, trajectories: list[
     for i_traj, trajectory in enumerate(tqdm(trajectories, desc="Computing Smoothness-CLAP Correlation", total=len(trajectories))):
         morph_embeddings = []
         for i_theta in range(len(trajectory)):
-            embedding = np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_AB_I{i_theta}.npy"))
+            embedding = np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_ST_I{i_theta}.npy"))
             morph_embeddings.append(embedding)
 
         # Stack the tuples in the list
