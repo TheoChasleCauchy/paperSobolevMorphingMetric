@@ -329,7 +329,7 @@
             const selected = document.querySelector(`input[name="${param}"]:checked`);
             filename += `_${param}_${selected.value}`;
         });
-        filename += '.mp3';
+        filename += '.wav';
         console.log(filename);
         const audio = new Audio(filename);
         audio.play().catch(e => console.error('Error playing audio:', e));
