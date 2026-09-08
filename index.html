@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobolev Norms in Neural Embeddings Measure Audio Morphing Regularity</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    .trajectory-example {
+        margin-bottom: 30px;
+    }
+
+    .circles-line {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin: 15px 0;
+        min-width: calc(45px * 13 + 12px * 12);
+    }
+
+    .circles-line::after {
+    content: '';
+    position: absolute;
+    top: 22.5px;
+    left: 22.5px;
+    right: 22.5px;
+    height: 2px;
+    background-color: #007bff;
+    z-index: -1;
+    }
+
+    .audio-circle {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: #007bff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        flex-shrink: 0;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .trajectory-ref .audio-circle,
+    .trajectory-ref::after {
+        background-color: #1f77b4;
+    }
+
+    .trajectory-nuc .audio-circle,
+    .trajectory-nuc::after {
+        background-color: #ff7f0e;
+    }
+
+    .trajectory-eqc .audio-circle,
+    .trajectory-eqc::after {
+        background-color: #9467bd;
+    }
+
+    .trajectory-null .audio-circle,
+    .trajectory-null::after {
+        background-color: #d62728;
+    }
+
+    .trajectory-ref .audio-circle:hover {
+        background-color: #195f90;
+    }
+
+    .trajectory-nuc .audio-circle:hover {
+        background-color: #cc660b;
+    }
+
+    .trajectory-eqc .audio-circle:hover {
+        background-color: #765297;
+    }
+
+    .trajectory-null .audio-circle:hover {
+        background-color: #ab1f20;
+    }
+
+    .circle-labels {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 22.5px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Title and Authors -->
+    <div id="header" class="container text-center my-4">
+      <h1>Sobolev Norms in Neural Embeddings Measure Audio Morphing Regularity</h1>
+      <p class="mt-3 mb-1"><strong>Théo Chasle Cauchy, Modan Tailleur, Barbara Pascal, Fanny Roche, Mathieu Lagrange</strong></p>
+      <p>Contact: <a href="mailto:theo.chasle-cauchy@ls2n.fr">theo.chasle-cauchy@ls2n.fr</a></p>
+    </div>
+    
+    <!-- Abstract -->
+    <div class="container">
+      <h2>Abstract</h2>
+      <p>
+      </p>
+      <p>This is the companion page for the paper: Sobolev Norms in Neural Embeddings Measure Audio Morphing Regularity</p>
+      <p>Experiment code is available in <a href="https://github.com/TheoChasleCauchy/paperSobolevMorphingMetric">this GitHub repository</a>.</p>
+    </div>
+
+      <!-- Trajectories Examples Section -->
+    <div class="container mt-5">
+        <h2>Trajectories Examples</h2>
+
+        <div class="trajectory-example">
+        <h3>Reference trajectory</h3>
+        <div class="circles-line trajectory-ref">
+            <button class="audio-circle" data-audio="path/to/audio1.mp3">s</button>
+            <button class="audio-circle" data-audio="path/to/audio2.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio3.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio4.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio5.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio6.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio7.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio8.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio9.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio10.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio11.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio12.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio13.mp3">t</button>
+        </div>
+
+        <div class="trajectory-example">
+        <h3>NUC trajectory</h3>
+        <div class="circles-line trajectory-nuc">
+            <button class="audio-circle" data-audio="path/to/audio1.mp3">s</button>
+            <button class="audio-circle" data-audio="path/to/audio2.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio3.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio4.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio5.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio6.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio7.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio8.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio9.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio10.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio11.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio12.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio13.mp3">t</button>
+        </div>
+
+        <div class="trajectory-example">
+        <h3>EQC trajectory</h3>
+        <div class="circles-line trajectory-eqc">
+            <button class="audio-circle" data-audio="path/to/audio1.mp3">s</button>
+            <button class="audio-circle" data-audio="path/to/audio2.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio3.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio4.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio5.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio6.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio7.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio8.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio9.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio10.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio11.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio12.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio13.mp3">t</button>
+        </div>
+
+        <div class="trajectory-example">
+        <h3>Null trajectory</h3>
+        <div class="circles-line trajectory-null">
+            <button class="audio-circle" data-audio="path/to/audio1.mp3">s</button>
+            <button class="audio-circle" data-audio="path/to/audio2.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio3.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio4.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio5.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio6.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio7.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio8.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio9.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio10.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio11.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio12.mp3"></button>
+            <button class="audio-circle" data-audio="path/to/audio13.mp3">t</button>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.audio-circle').forEach(function(circle) {
+        circle.addEventListener('click', function() {
+            var audioUrl = this.getAttribute('data-audio');
+            if (audioUrl) {
+            var audio = new Audio(audioUrl);
+            audio.play().catch(function(e) {
+                console.error('Error playing audio:', e);
+            });
+            }
+        });
+        });
+    });
+    </script>
+
+</body>
+
+</html>
