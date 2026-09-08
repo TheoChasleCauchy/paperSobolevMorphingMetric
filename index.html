@@ -22,14 +22,15 @@
     }
 
     .circles-line::after {
-    content: '';
-    position: absolute;
-    top: 22.5px;
-    left: 22.5px;
-    right: 22.5px;
-    height: 2px;
-    background-color: #007bff;
-    z-index: -1;
+        content: '';
+        position: absolute;
+        top: 22.5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(12 * (45px + 12px));
+        height: 2px;
+        background-color: #007bff;
+        z-index: -1;
     }
 
     .audio-circle {
