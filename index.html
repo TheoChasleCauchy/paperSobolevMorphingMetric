@@ -325,7 +325,7 @@
 
     document.getElementById('playHypercube').addEventListener('click', function() {
         const params = ['logOmega', 'tau', 'logP', 'logD', 'alpha'];
-        let filename = 'audios/audios_extrema/audio_extrema';
+        let filename = 'companion_page_resources/audios_extrema/audio_extrema';
         params.forEach(param => {
             const selected = document.querySelector(`input[name="${param}"]:checked`);
             filename += `_${param}_${selected.value}`;
