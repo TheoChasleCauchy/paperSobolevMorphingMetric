@@ -4,8 +4,8 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/TheoChasleCauchy/paperTTPSynthesizerAssessment.git
-   cd paperTTPSynthesizerAssessment
+   git clone https://github.com/TheoChasleCauchy/paperSobolevMorphingMetric.git
+   cd paperSobolevMorphingMetric
    ```
 
 2. Create a virtual environment (optional)
@@ -29,4 +29,4 @@
     ```
 
 ## Companion page
-Please check the companion page for audio examples: https://theochaslecauchy.github.io/paperTTPSynthesizerAssessment/
+Please check the companion page for audio examples: https://theochaslecauchy.github.io/paperSobolevMorphingMetric/
