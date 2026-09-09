@@ -25,3 +25,5 @@ seed: 42
 number_of_couples: 1000
 num_intermediate_samples: 11
 models: ["MFCC", "VGGish", "MSCLAP", "LaionCLAP_music", "LaionCLAP_audio", "MERT_v0-public", "MERT_v1-95M", "MERT_v1-330M"]
+
+random_sampling_size: 50000

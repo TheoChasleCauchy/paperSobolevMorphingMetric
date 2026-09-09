@@ -172,7 +172,7 @@ def main():
     from compute_embeddings import compute_points_embeddings
 
     points_filename = "data/generated/parameters/parameters_random_sampling.csv"
-    sample_random_points(parameters_hypercube=parameters_hypercube, num_points=50000, points_filename=points_filename, seed=seed)
+    sample_random_points(parameters_hypercube=parameters_hypercube, num_points=config["random_sampling_size"], points_filename=points_filename, seed=seed)
 
     audio_dir = "data/generated/audios/audios_random_sampling"
     synthesize_audios_points(points_filename, logscale = True, audio_dir=audio_dir)
