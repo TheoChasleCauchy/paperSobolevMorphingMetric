@@ -9,7 +9,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <style>
     .trajectory-example {
-        margin-bottom: 30px;
+        margin-bottom: 50px;
     }
 
     .circles-line {
@@ -50,8 +50,7 @@
         justify-content: center;
     }
 
-    .trajectory-ref .audio-circle,
-    .trajectory-ref::after {
+    .trajectory-ref .audio-circle {
         background-color: #1f77b4;
     }
 
@@ -158,6 +157,35 @@
         max-width: 600px;
         height: auto;
     }
+
+    .parameter-labels-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-top: -15px;
+        margin-bottom: 50px;
+        min-width: calc(45px * 13 + 15px * 12);
+    }
+
+    .parameter-name {
+        position: absolute;
+        left: 0;
+        font-size: 17px;
+        margin-top: -4px;
+    }
+
+    .parameter-labels {
+        display: flex;
+        gap: 12px;
+        width: calc(45px * 13 + 15px * 12);
+        justify-content: center;
+    }
+
+    .label-value {
+        font-size: 15px;
+        text-align: center;
+        width: 45px;
+    }
   </style>
 </head>
 <body>
@@ -258,26 +286,43 @@
 
         <figure class="text-center">
             <img src="companion_page_resources/images/ref_and_null_trajectories.jpg">
-            <caption>Reference trajectory example (solid blue) and Null trajectory example (dotted red).</caption>
+            <figcaption>Reference trajectory example (solid blue) and Null trajectory example (dotted red).</figcaption>
         </figure>
 
         <div class="trajectory-example">
-            <h4>Reference trajectory</h4>
-            <p>Reference trajectories are synthesized with a regularly sampled linear interpolation between anchors' log(p) values (other parameters have the same values between <it>s</it> and <it>t</it>).</p>
-            <div class="circles-line trajectory-ref">
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I0.wav">s</button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I1.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I2.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I3.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I4.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I5.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I6.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I7.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I8.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I9.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I10.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I11.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I12.wav">t</button>
+        <h4>Reference trajectory</h4>
+        <p>Reference trajectories are synthesized with a regularly sampled linear interpolation between anchors' log(p) values (other parameters have the same values between <i>s</i> and <i>t</i>).</p>
+        <div class="circles-line trajectory-ref">
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I0.wav">s</button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I1.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I2.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I3.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I4.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I5.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I6.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I7.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I8.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I9.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I10.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I11.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I12.wav">t</button>
+        </div>
+        <div class="parameter-labels-container">
+            <span class="parameter-name">log(p)</span>
+            <div class="parameter-labels">
+                <span class="label-value">-1.90</span>
+                <span class="label-value">-1.68</span>
+                <span class="label-value">-1.47</span>
+                <span class="label-value">-1.25</span>
+                <span class="label-value">-1.03</span>
+                <span class="label-value">-0.82</span>
+                <span class="label-value">-0.60</span>
+                <span class="label-value">-0.39</span>
+                <span class="label-value">-0.17</span>
+                <span class="label-value">0.06</span>
+                <span class="label-value">0.27</span>
+                <span class="label-value">0.48</span>
+                <span class="label-value">0.69</span>
             </div>
         </div>
 
@@ -306,7 +351,7 @@
 
         <figure class="text-center">
             <img src="companion_page_resources/images/adversarial_trajectories.jpg">
-            <caption>Adversarial trajectories: NUC trajectory example (solid orange) and EQC trajectory example (solid violet).</caption>
+            <figcaption>Adversarial trajectories: NUC trajectory example (solid orange) and EQC trajectory example (solid violet).</figcaption>
         </figure>
 
         <div class="trajectory-example">
