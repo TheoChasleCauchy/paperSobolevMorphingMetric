@@ -114,14 +114,14 @@ def make_table(results_dir):
         
         return metrics_values
     
-    results_dir_linear = f"{results_dir}/results_ref_trajectories"
-    linear_metrics_values = get_metrics_values(results_dir_linear)
-    results_dir_random = f"{results_dir}/results_null_trajectories"
-    random_metrics_values = get_metrics_values(results_dir_random)
+    results_dir_ref = f"{results_dir}/results_ref_trajectories"
+    ref_metrics_values = get_metrics_values(results_dir_ref)
+    results_dir_null = f"{results_dir}/results_null_trajectories"
+    null_metrics_values = get_metrics_values(results_dir_null)
         
     results_dir_nuc = f"{results_dir}/results_nuc_trajectories"
     nuc_metrics_values = get_metrics_values(results_dir_nuc)
-    results_dir_eqc = f"{results_dir}/results_eqc_trajectories" # f"{results_dir}/normalized_eqc" # f"{results_dir}/eqc"
+    results_dir_eqc = f"{results_dir}/results_eqc_trajectories"
     eqc_metrics_values = get_metrics_values(results_dir_eqc, no_audio=True)
 
     # Write the table to a CSV file
@@ -137,37 +137,37 @@ def make_table(results_dir):
         row = [
             "Correspondence", 
             "MFCC",
-            f"{linear_metrics_values['MFCC Correspondence SM'][0]:.2f} ({linear_metrics_values['MFCC Correspondence SM'][1]:.2f})",
+            f"{ref_metrics_values['MFCC Correspondence SM'][0]:.2f} ({ref_metrics_values['MFCC Correspondence SM'][1]:.2f})",
             f"{nuc_metrics_values['MFCC Correspondence SM'][0]:.2f} ({nuc_metrics_values['MFCC Correspondence SM'][1]:.2f})",
             f"{eqc_metrics_values['MFCC Correspondence SM'][0]:.2f} ({eqc_metrics_values['MFCC Correspondence SM'][1]:.2f})",
-            f"{random_metrics_values['MFCC Correspondence SM'][0]:.2f} ({random_metrics_values['MFCC Correspondence SM'][1]:.2f})",
+            f"{null_metrics_values['MFCC Correspondence SM'][0]:.2f} ({null_metrics_values['MFCC Correspondence SM'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Smoothness CLAP",
             "L-CLAP audio",
-            f"{linear_metrics_values['CLAP Smoothness MF'][0]:.2f} ({linear_metrics_values['CLAP Smoothness MF'][1]:.2f})",
+            f"{ref_metrics_values['CLAP Smoothness MF'][0]:.2f} ({ref_metrics_values['CLAP Smoothness MF'][1]:.2f})",
             f"{nuc_metrics_values['CLAP Smoothness MF'][0]:.2f} ({nuc_metrics_values['CLAP Smoothness MF'][1]:.2f})",
             f"{eqc_metrics_values['CLAP Smoothness MF'][0]:.2f} ({eqc_metrics_values['CLAP Smoothness MF'][1]:.2f})",
-            f"{random_metrics_values['CLAP Smoothness MF'][0]:.2f} ({random_metrics_values['CLAP Smoothness MF'][1]:.2f})",
+            f"{null_metrics_values['CLAP Smoothness MF'][0]:.2f} ({null_metrics_values['CLAP Smoothness MF'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Intermediateness",
             "CDPAM",
-            f"{linear_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({linear_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
+            f"{ref_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({ref_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
             f"{eqc_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({eqc_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
-            f"{random_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({random_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
+            f"{null_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({null_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Smoothness CDPAM",
             "CDPAM",
-            f"{linear_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({linear_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
+            f"{ref_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({ref_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
             f"{eqc_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({eqc_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
-            f"{random_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({random_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
+            f"{null_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({null_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
         ]
         writer.writerow(row)
 
@@ -175,55 +175,55 @@ def make_table(results_dir):
         row = [
             "Correspondence", 
             "MERT",
-            f"{linear_metrics_values['MERT Correspondence SM'][0]:.2f} ({linear_metrics_values['MERT Correspondence SM'][1]:.2f})",
+            f"{ref_metrics_values['MERT Correspondence SM'][0]:.2f} ({ref_metrics_values['MERT Correspondence SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Correspondence SM'][0]:.2f} ({nuc_metrics_values['MERT Correspondence SM'][1]:.2f})",
             f"{eqc_metrics_values['MERT Correspondence SM'][0]:.2f} ({eqc_metrics_values['MERT Correspondence SM'][1]:.2f})",
-            f"{random_metrics_values['MERT Correspondence SM'][0]:.2f} ({random_metrics_values['MERT Correspondence SM'][1]:.2f})",
+            f"{null_metrics_values['MERT Correspondence SM'][0]:.2f} ({null_metrics_values['MERT Correspondence SM'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Smoothness CLAP",
             "MERT",
-            f"{linear_metrics_values['MERT Smoothness MF'][0]:.2f} ({linear_metrics_values['MERT Smoothness MF'][1]:.2f})",
+            f"{ref_metrics_values['MERT Smoothness MF'][0]:.2f} ({ref_metrics_values['MERT Smoothness MF'][1]:.2f})",
             f"{nuc_metrics_values['MERT Smoothness MF'][0]:.2f} ({nuc_metrics_values['MERT Smoothness MF'][1]:.2f})",
             f"{eqc_metrics_values['MERT Smoothness MF'][0]:.2f} ({eqc_metrics_values['MERT Smoothness MF'][1]:.2f})",
-            f"{random_metrics_values['MERT Smoothness MF'][0]:.2f} ({random_metrics_values['MERT Smoothness MF'][1]:.2f})",
+            f"{null_metrics_values['MERT Smoothness MF'][0]:.2f} ({null_metrics_values['MERT Smoothness MF'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Intermediateness",
             "MERT",
-            f"{linear_metrics_values['MERT Intermediateness SM'][0]:.2f} ({linear_metrics_values['MERT Intermediateness SM'][1]:.2f})",
+            f"{ref_metrics_values['MERT Intermediateness SM'][0]:.2f} ({ref_metrics_values['MERT Intermediateness SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Intermediateness SM'][0]:.2f} ({nuc_metrics_values['MERT Intermediateness SM'][1]:.2f})",
             f"{eqc_metrics_values['MERT Intermediateness SM'][0]:.2f} ({eqc_metrics_values['MERT Intermediateness SM'][1]:.2f})",
-            f"{random_metrics_values['MERT Intermediateness SM'][0]:.2f} ({random_metrics_values['MERT Intermediateness SM'][1]:.2f})",
+            f"{null_metrics_values['MERT Intermediateness SM'][0]:.2f} ({null_metrics_values['MERT Intermediateness SM'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Smoothness CDPAM",
             "MERT",
-            f"{linear_metrics_values['MERT Smoothness SM'][0]:.2f} ({linear_metrics_values['MERT Smoothness SM'][1]:.2f})",
+            f"{ref_metrics_values['MERT Smoothness SM'][0]:.2f} ({ref_metrics_values['MERT Smoothness SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Smoothness SM'][0]:.2f} ({nuc_metrics_values['MERT Smoothness SM'][1]:.2f})",
             f"{eqc_metrics_values['MERT Smoothness SM'][0]:.2f} ({eqc_metrics_values['MERT Smoothness SM'][1]:.2f})",
-            f"{random_metrics_values['MERT Smoothness SM'][0]:.2f} ({random_metrics_values['MERT Smoothness SM'][1]:.2f})",
+            f"{null_metrics_values['MERT Smoothness SM'][0]:.2f} ({null_metrics_values['MERT Smoothness SM'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Sobolev (0, 2)",
             "MERT",
-            f"{linear_metrics_values['Sobolev (0, 2)'][0]:.2f} ({linear_metrics_values['Sobolev (0, 2)'][1]:.2f})",
+            f"{ref_metrics_values['Sobolev (0, 2)'][0]:.2f} ({ref_metrics_values['Sobolev (0, 2)'][1]:.2f})",
             f"{nuc_metrics_values['Sobolev (0, 2)'][0]:.2f} ({nuc_metrics_values['Sobolev (0, 2)'][1]:.2f})",
             f"{eqc_metrics_values['Sobolev (0, 2)'][0]:.2f} ({eqc_metrics_values['Sobolev (0, 2)'][1]:.2f})",
-            f"{random_metrics_values['Sobolev (0, 2)'][0]:.2f} ({random_metrics_values['Sobolev (0, 2)'][1]:.2f})",
+            f"{null_metrics_values['Sobolev (0, 2)'][0]:.2f} ({null_metrics_values['Sobolev (0, 2)'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
             "Sobolev (1, 2)",
             "MERT",
-            f"{linear_metrics_values['Sobolev (1, 2)'][0]:.2f} ({linear_metrics_values['Sobolev (1, 2)'][1]:.2f})",
+            f"{ref_metrics_values['Sobolev (1, 2)'][0]:.2f} ({ref_metrics_values['Sobolev (1, 2)'][1]:.2f})",
             f"{nuc_metrics_values['Sobolev (1, 2)'][0]:.2f} ({nuc_metrics_values['Sobolev (1, 2)'][1]:.2f})",
             f"{eqc_metrics_values['Sobolev (1, 2)'][0]:.2f} ({eqc_metrics_values['Sobolev (1, 2)'][1]:.2f})",
-            f"{random_metrics_values['Sobolev (1, 2)'][0]:.2f} ({random_metrics_values['Sobolev (1, 2)'][1]:.2f})",
+            f"{null_metrics_values['Sobolev (1, 2)'][0]:.2f} ({null_metrics_values['Sobolev (1, 2)'][1]:.2f})",
         ]
         writer.writerow(row)
 

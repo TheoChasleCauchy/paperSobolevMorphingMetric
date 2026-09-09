@@ -10,6 +10,7 @@ dependencies = [
     "nnAudio",
     "joblib",
     "numpy<2",
+    "torch",
     "scipy>=1.11.0",
     "matplotlib",
     "fork-pnp-synth @ https://github.com/TheoChasleCauchy/fork_pnp_synth.git",
