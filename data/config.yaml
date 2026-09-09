@@ -5,7 +5,7 @@ parameters_hypercube: {
     },
     "tau": {
         "min": 0.015,
-        "max": 8000.0
+        "max": 1.0
     },
     "p": {
         "min": 0.15,
