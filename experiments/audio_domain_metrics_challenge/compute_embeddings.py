@@ -32,7 +32,7 @@ def compute_points_embeddings(models, audio_dir, embeddings_dir):
         model = _load_model(model_name)
         embeddings_folder = f"{embeddings_dir}/{model_name}"
         os.makedirs(embeddings_folder, exist_ok=True)
-        for wav_file in wav_files:
+        for wav_file in tqdm(wav_files, desc=f"Computing Embeddings for model {model_name}"):
             if os.path.exists(os.path.join(embeddings_folder, f"{wav_file.replace('.wav', '.npy')}")):
                 continue
             audio = _load_audio(model, os.path.join(audio_dir, wav_file))
