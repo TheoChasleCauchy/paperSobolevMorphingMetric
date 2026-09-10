@@ -120,32 +120,11 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
 
         return closest_point_filepath
 
-    def calculate_angle(a, b, intermediate):
-        """
-        Calculate the angle in degrees between the AB line and the line from A to the intermediate point.
-        This measures how much the closest found point deviates from the direct path from A to B.
-        """
-        vec_ai = intermediate - a
-        vec_ab = b - a
-
-        norm_ai = np.linalg.norm(vec_ai)
-        norm_ab = np.linalg.norm(vec_ab)
-
-        if norm_ai == 0 or norm_ab == 0:
-            return 0.0
-
-        cos_angle = np.dot(vec_ai, vec_ab) / (norm_ai * norm_ab)
-        
-        return np.degrees(np.arccos(cos_angle))
-
     # Load couples (A, B pairs) from CSV
     couples = load_and_extract_couples(anchors_couples_parameters_filepath)
 
     # Load all available random points for nearest-neighbor search
     random_points = load_random_points_from_csv(random_points_embeddings_dir)
-
-    # Storage for angle measurements
-    angles_data = []
 
     for i_couple in tqdm(range(len(couples)), desc=f"Computing embeddings EQC trajectories"):
         # Copy endpoint S (I0) and T (I{num_intermediate_samples+1}) to trajectories directory
