@@ -1,5 +1,7 @@
 import csv
 import os
+import torch
+import numpy as np
 import yaml
 
 from compute_embeddings import compute_trajectories_embeddings
@@ -38,8 +40,8 @@ def main():
         config = yaml.safe_load(f)
 
     seed = config["seed"]
-    # np.random.seed(seed)
-    # torch.manual_seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
 
     parameters_hypercube = config["parameters_hypercube"]
 
