@@ -135,7 +135,7 @@ def make_table(results_dir):
 
         # Write rows: models as rows, (k, p) as columns, mean+-std as values
         row = [
-            "Correspondence", 
+            "Correspondence SM", 
             "MFCC",
             f"{ref_metrics_values['MFCC Correspondence SM'][0]:.2f} ({ref_metrics_values['MFCC Correspondence SM'][1]:.2f})",
             f"{nuc_metrics_values['MFCC Correspondence SM'][0]:.2f} ({nuc_metrics_values['MFCC Correspondence SM'][1]:.2f})",
@@ -144,7 +144,7 @@ def make_table(results_dir):
         ]
         writer.writerow(row)
         row = [
-            "Smoothness CLAP",
+            "Smoothness MF",
             "L-CLAP audio",
             f"{ref_metrics_values['CLAP Smoothness MF'][0]:.2f} ({ref_metrics_values['CLAP Smoothness MF'][1]:.2f})",
             f"{nuc_metrics_values['CLAP Smoothness MF'][0]:.2f} ({nuc_metrics_values['CLAP Smoothness MF'][1]:.2f})",
@@ -153,7 +153,7 @@ def make_table(results_dir):
         ]
         writer.writerow(row)
         row = [
-            "Intermediateness",
+            "Intermediateness SM",
             "CDPAM",
             f"{ref_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({ref_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
@@ -162,7 +162,7 @@ def make_table(results_dir):
         ]
         writer.writerow(row)
         row = [
-            "Smoothness CDPAM",
+            "Smoothness SM",
             "CDPAM",
             f"{ref_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({ref_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
@@ -173,7 +173,7 @@ def make_table(results_dir):
 
         # MERT
         row = [
-            "Correspondence", 
+            "Correspondence SM", 
             "MERT",
             f"{ref_metrics_values['MERT Correspondence SM'][0]:.2f} ({ref_metrics_values['MERT Correspondence SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Correspondence SM'][0]:.2f} ({nuc_metrics_values['MERT Correspondence SM'][1]:.2f})",
@@ -182,7 +182,7 @@ def make_table(results_dir):
         ]
         writer.writerow(row)
         row = [
-            "Smoothness CLAP",
+            "Smoothness MF",
             "MERT",
             f"{ref_metrics_values['MERT Smoothness MF'][0]:.2f} ({ref_metrics_values['MERT Smoothness MF'][1]:.2f})",
             f"{nuc_metrics_values['MERT Smoothness MF'][0]:.2f} ({nuc_metrics_values['MERT Smoothness MF'][1]:.2f})",
@@ -191,7 +191,7 @@ def make_table(results_dir):
         ]
         writer.writerow(row)
         row = [
-            "Intermediateness",
+            "Intermediateness SM",
             "MERT",
             f"{ref_metrics_values['MERT Intermediateness SM'][0]:.2f} ({ref_metrics_values['MERT Intermediateness SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Intermediateness SM'][0]:.2f} ({nuc_metrics_values['MERT Intermediateness SM'][1]:.2f})",
@@ -200,7 +200,7 @@ def make_table(results_dir):
         ]
         writer.writerow(row)
         row = [
-            "Smoothness CDPAM",
+            "Smoothness SM",
             "MERT",
             f"{ref_metrics_values['MERT Smoothness SM'][0]:.2f} ({ref_metrics_values['MERT Smoothness SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Smoothness SM'][0]:.2f} ({nuc_metrics_values['MERT Smoothness SM'][1]:.2f})",
