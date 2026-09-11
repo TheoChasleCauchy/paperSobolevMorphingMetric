@@ -34,14 +34,14 @@
  - Move the file cdpam-0.0.6/cdpam/CDPAM_trained/scratchJNDdefault_best_model.pth to the models/CDPAM folder of the repository
 
 ## Configuration
-Experiment parameters are defined in data/config.yaml. Edit these files to customize the experiments.
+Experiment parameters are defined in data/config.yaml. Edit this file to customize the experiments.
 
 ## Experiments
  - To launch all experiments:
     ```bash
     python scripts/main.py
     ```
- - To launch a specifice experiment:
+ - To launch a specific experiment:
     ```bash
     python experiments/[experiment]/main.py
     ```
