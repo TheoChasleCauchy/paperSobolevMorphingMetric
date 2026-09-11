@@ -186,6 +186,33 @@
         text-align: center;
         width: 45px;
     }
+
+    .parameter-labels-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5px;
+        margin-bottom: 50px;
+        min-width: calc(45px * 13 + 12px * 12);
+    }
+
+    .parameter-label {
+        font-size: 17px;
+        margin-bottom: 5px;
+    }
+
+    .parameter-labels {
+        display: flex;
+        gap: 12px;
+        width: calc(45px * 13 + 12px * 12);
+        justify-content: center;
+    }
+
+    .label-value {
+        font-size: 15px;
+        text-align: center;
+        width: 45px;
+    }
   </style>
 </head>
 <body>
@@ -208,17 +235,19 @@
 
 
     <div class="container mt-5">
-        <h2>Parameters Hypercube</h2>
+        <h2>Reference Timbre Space</h2>
         <h3>Parameters</h3>
         <ul>
             <li>log(ω): fundamental frequency of the drum, controlling pitch</li>
             <li>𝜏: duration of the drum sound, inversely proportional to the modulation frequency</li>
-            <li>log(<i>p</i>): frequency-dependent damping coefficient in log-scale</li>
+            <li>log(<i>p</i>): frequency-dependent damping coefficient in log-scale, allowing to control the material of the plate</li>
             <li>log(<i>D</i>): dispersion parameter, controlling the inharmonicity of the overtones in log-scale</li>
             <li>α: aspect ratio of the rectangular drum membrane</li>
         </ul>
 
-        <h3>Listening</h3>
+        <h3>Listening to the extrema of the hypercube</h3>
+        <p>In the defined hypercube, the synthesizer produces a metal-like sound for log(<it>p</it>) at its minimum value and a wooden-like sound for log(<it>p</it>) at its maximum value.</p>
+        <p>By choosing the minimum or maximum values for each parameter, you can explore the extrema of the hypercube:</p>
         <div class="parameters-line">
             <div class="parameter-item">
             <h4>log(ω)</h4>
@@ -277,73 +306,75 @@
     <div class="container mt-5">
         <h2>Trajectories Examples</h2>
         <div class="container mt-4">
-            <h4>Parameter Values</h4>
-            <p><strong>s:</strong> log(ω) = value1, τ = value2, log(p) = value3, log(D) = value4, α = value5</p>
-            <p><strong>t:</strong> log(ω) = value1, τ = value2, log(p) = value3, log(D) = value4, α = value5</p>
+            <h4>Parameter Values of the Source <i>s</i> and Target <i>t</i>:</h4>
+            <h5><i>s</i>:</h5>
+            <p>log(ω) = 3.40, τ = 0.34, log(p) = -0.82, log(D) = -1.43, α = 0.32</p>
+            <h5><i>t</i>:</h5>
+            <p>log(ω) = 3.40, τ = 0.34, log(p) = 0.30, log(D) = -1.43, α = 0.32</p>
         </div>
 
         <h3>Ref and Null</h3>
 
         <figure class="text-center">
             <img src="companion_page_resources/images/ref_and_null_trajectories.jpg">
-            <figcaption>Reference trajectory example (solid blue) and Null trajectory example (dotted red).</figcaption>
         </figure>
 
         <div class="trajectory-example">
-        <h4>Reference trajectory</h4>
+        <h4>Listening to a Reference trajectory</h4>
         <p>Reference trajectories are synthesized with a regularly sampled linear interpolation between anchors' log(p) values (other parameters have the same values between <i>s</i> and <i>t</i>).</p>
+        <p>To listen to the trajectory's sounds, click on the audio circles below:</p>
         <div class="circles-line trajectory-ref">
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I0.wav">s</button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I1.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I2.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I3.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I4.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I5.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I6.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I7.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I8.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I9.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I10.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I11.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_25_AB_I12.wav">t</button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I0.wav">s</button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I1.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I2.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I3.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I4.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I5.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I6.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I7.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I8.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I9.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I10.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I11.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_AB_I12.wav">t</button>
         </div>
         <div class="parameter-labels-container">
-            <span class="parameter-name">log(p)</span>
             <div class="parameter-labels">
-                <span class="label-value">-1.90</span>
-                <span class="label-value">-1.68</span>
-                <span class="label-value">-1.47</span>
-                <span class="label-value">-1.25</span>
-                <span class="label-value">-1.03</span>
                 <span class="label-value">-0.82</span>
-                <span class="label-value">-0.60</span>
-                <span class="label-value">-0.39</span>
+                <span class="label-value">-0.73</span>
+                <span class="label-value">-0.64</span>
+                <span class="label-value">-0.54</span>
+                <span class="label-value">-0.45</span>
+                <span class="label-value">-0.36</span>
+                <span class="label-value">-0.26</span>
                 <span class="label-value">-0.17</span>
-                <span class="label-value">0.06</span>
-                <span class="label-value">0.27</span>
-                <span class="label-value">0.48</span>
-                <span class="label-value">0.69</span>
+                <span class="label-value">-0.07</span>
+                <span class="label-value">0.02</span>
+                <span class="label-value">0.11</span>
+                <span class="label-value">0.21</span>
+                <span class="label-value">0.30</span>
             </div>
+            <div class="parameter-label">log(p)</div>
         </div>
 
 
         <div class="trajectory-example">
-            <h4>Null trajectory</h4>
+            <h4>Listening to a Null trajectory</h4>
             <p>Null trajectories are synthesized with tuples of parameters randomly sampled in the hypercube.</p>
             <div class="circles-line trajectory-null">
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I0.wav">s</button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I1.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I2.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I3.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I4.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I5.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I6.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I7.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I8.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I9.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I10.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I11.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_3_AB_I12.wav">t</button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I0.wav">s</button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I1.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I2.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I3.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I4.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I5.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I6.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I7.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I8.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I9.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I10.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I11.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_AB_I12.wav">t</button>
             </div>
         </div>
 
@@ -351,31 +382,30 @@
 
         <figure class="text-center">
             <img src="companion_page_resources/images/adversarial_trajectories.jpg">
-            <figcaption>Adversarial trajectories: NUC trajectory example (solid orange) and EQC trajectory example (solid violet).</figcaption>
         </figure>
 
         <div class="trajectory-example">
-            <h4>Non-Uniform Configuration trajectory</h4>
+            <h4>Listening to a Non-Uniform Configuration trajectory</h4>
             <p>NUC trajectories are synthesized with a non-uniform linear interpolation between anchors' log(p) values.</p>
             <div class="circles-line trajectory-nuc">
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I0.wav">s</button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I1.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I2.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I3.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I4.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I5.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I6.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I7.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I8.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I9.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I10.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I11.wav"></button>
-                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_3_AB_I12.wav">t</button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I0.wav">s</button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I1.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I2.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I3.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I4.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I5.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I6.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I7.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I8.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I9.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I10.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I11.wav"></button>
+                <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_AB_I12.wav">t</button>
             </div>
         </div>
 
         <div class="trajectory-example">
-            <h4>Equi-distant Configuration trajectory</h4>
+            <h4>Listening to an Equi-distant Configuration trajectory</h4>
             <p>EQC trajectories are synthesized with parameters such that the distance to the source is the same as in the ideal trajectory but the angle is randomly sampled.</p>
             <div class="circles-line trajectory-eqc">
                 <button class="audio-circle" data-audio="companion_page_resources/audios_eqc_example/audio_row_0_AB_I0.wav">s</button>
