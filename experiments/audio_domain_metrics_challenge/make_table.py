@@ -47,9 +47,7 @@ def make_table(results_dir):
             metrics_values["Sobolev (1, 2)"] = (mean_sobolev_k1_p2, std_sobolev_k1_p2)
         
         # Get Correspondence value
-        if no_audio:
-            metrics_values["MFCC Correspondence SM"] = (404.0, 404.0)
-        else:
+        if not no_audio:
             mfcc_correspondence_csv_path = os.path.join(results_dir, "MFCC", "MFCC_correspondence_SM_values.csv")
             with open(mfcc_correspondence_csv_path, 'r') as f:
                 reader = list(csv.reader(f))
@@ -69,9 +67,7 @@ def make_table(results_dir):
             metrics_values["MERT Correspondence SM"] = (mean_correspondence, std_correspondence)
         
         # Get Intermediateness value
-        if no_audio:
-            metrics_values["CDPAM Intermediateness SM"] = (404.0, 404.0)
-        else:
+        if not no_audio:
             cdpam_intermediateness_csv_path = os.path.join(results_dir, "CDPAM", "CDPAM_intermediateness_SM_values.csv")
             with open(cdpam_intermediateness_csv_path, 'r') as f:
                 reader = list(csv.reader(f))
@@ -91,9 +87,7 @@ def make_table(results_dir):
             metrics_values["MERT Intermediateness SM"] = (mean_intermediateness, std_intermediateness)
 
         # Get Smoothness CDPAM value
-        if no_audio:
-            metrics_values["CDPAM Smoothness SM"] = (404.0, 404.0)
-        else:
+        if not no_audio:
             cdpam_smoothness_cdpam_csv_path = os.path.join(results_dir, "CDPAM", "CDPAM_smoothness_SM_values.csv")
             with open(cdpam_smoothness_cdpam_csv_path, 'r') as f:
                 reader = list(csv.reader(f))
@@ -139,7 +133,7 @@ def make_table(results_dir):
             "MFCC",
             f"{ref_metrics_values['MFCC Correspondence SM'][0]:.2f} ({ref_metrics_values['MFCC Correspondence SM'][1]:.2f})",
             f"{nuc_metrics_values['MFCC Correspondence SM'][0]:.2f} ({nuc_metrics_values['MFCC Correspondence SM'][1]:.2f})",
-            f"{eqc_metrics_values['MFCC Correspondence SM'][0]:.2f} ({eqc_metrics_values['MFCC Correspondence SM'][1]:.2f})",
+            f"",
             f"{null_metrics_values['MFCC Correspondence SM'][0]:.2f} ({null_metrics_values['MFCC Correspondence SM'][1]:.2f})",
         ]
         writer.writerow(row)
@@ -157,7 +151,7 @@ def make_table(results_dir):
             "CDPAM",
             f"{ref_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({ref_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
-            f"{eqc_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({eqc_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
+            f"",
             f"{null_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({null_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
         ]
         writer.writerow(row)
@@ -166,7 +160,7 @@ def make_table(results_dir):
             "CDPAM",
             f"{ref_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({ref_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
-            f"{eqc_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({eqc_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
+            f"",
             f"{null_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({null_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
         ]
         writer.writerow(row)
