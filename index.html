@@ -213,6 +213,10 @@
         text-align: center;
         width: 45px;
     }
+
+    .center {
+        text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -247,7 +251,7 @@
 
         <h3>Listening to the extrema of the hypercube</h3>
         <p>In the defined hypercube, the synthesizer produces a metal-like sound for log(<it>p</it>) at its minimum value and a wooden-like sound for log(<it>p</it>) at its maximum value.</p>
-        <p>By choosing the minimum or maximum values for each parameter, you can explore the extrema of the hypercube:</p>
+        <p>By choosing the minimum or maximum values for each parameter, you can listen to the extrema of the hypercube:</p>
         <div class="parameters-line">
             <div class="parameter-item">
             <h4>log(ω)</h4>
@@ -322,7 +326,9 @@
         <div class="trajectory-example">
         <h4>Listening to a Reference trajectory</h4>
         <p>Reference trajectories are synthesized with a regularly sampled linear interpolation between anchors' log(p) values (other parameters have the same values between <i>s</i> and <i>t</i>).</p>
-        <p>To listen to the trajectory's sounds, click on the audio circles below:</p>
+        <p class="center">
+            To listen to the anchors s and t and the sounds of the morphing trajectory, click on the circles below:
+        </p>
         <div class="circles-line trajectory-ref">
             <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I0.wav">s</button>
             <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I1.wav"></button>
@@ -361,6 +367,9 @@
         <div class="trajectory-example">
             <h4>Listening to a Null trajectory</h4>
             <p>Null trajectories are synthesized with tuples of parameters randomly sampled in the hypercube.</p>
+            <p class="center">
+                To listen to the anchors s and t and the sounds of the morphing trajectory, click on the circles below:
+            </p>
             <div class="circles-line trajectory-null">
                 <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_ST_I0.wav">s</button>
                 <button class="audio-circle" data-audio="companion_page_resources/audios_null_example/audio_row_1_ST_I1.wav"></button>
@@ -387,6 +396,9 @@
         <div class="trajectory-example">
             <h4>Listening to a Non-Uniform Configuration trajectory</h4>
             <p>NUC trajectories are synthesized with a non-uniform linear interpolation between anchors' log(p) values.</p>
+            <p class="center">
+                To listen to the anchors s and t and the sounds of the morphing trajectory, click on the circles below:
+            </p>
             <div class="circles-line trajectory-nuc">
                 <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_ST_I0.wav">s</button>
                 <button class="audio-circle" data-audio="companion_page_resources/audios_nuc_example/audio_row_1_ST_I1.wav"></button>
@@ -407,6 +419,9 @@
         <div class="trajectory-example">
             <h4>Listening to an Equi-distant Configuration trajectory</h4>
             <p>EQC trajectories are synthesized with parameters such that the distance to the source is the same as in the ideal trajectory but the angle is randomly sampled.</p>
+            <p class="center">
+                To listen to the anchors s and t and the sounds of the morphing trajectory, click on the circles below:
+            </p>
             <div class="circles-line trajectory-eqc">
                 <button class="audio-circle" data-audio="companion_page_resources/audios_eqc_example/audio_row_1_ST_I0.wav">s</button>
                 <button class="audio-circle" data-audio="companion_page_resources/audios_eqc_example/audio_row_1_ST_I1.wav"></button>
