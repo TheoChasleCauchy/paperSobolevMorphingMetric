@@ -50,7 +50,7 @@
         justify-content: center;
     }
 
-    .trajectory-ref .audio-circle {
+    .trajectory-lum .audio-circle {
         background-color: #1f77b4;
     }
 
@@ -69,7 +69,7 @@
         background-color: #d62728;
     }
 
-    .trajectory-ref .audio-circle:hover {
+    .trajectory-lum .audio-circle:hover {
         background-color: #195f90;
     }
 
@@ -231,8 +231,7 @@
     <!-- Abstract -->
     <div class="container">
       <h2>Abstract</h2>
-      <p>
-      </p>
+      <p>Morphing has recently gained renewed interest with the emergence of generative models, particularly in audio and image generation. In musical sound synthesis, morphing can generate intermediate sounds between two targets, helping musicians and sound engineers explore new sounds with interesting perceptual properties. As morphing is inherently defined in perceptual terms, evaluating this task is challenging. In this work, we introduce Sobolev Distances to Ideal Morphing (SDIM), a novel objective metric to quantify the regularity of audio morphing trajectories in perceptually relevant audio embedding spaces. Leveraging a physics-based sound synthesizer, we evaluate the discriminative power of SDIM on controlled morphing trajectories with varying degrees of regularity and compare it with that of existing audio morphing metrics. Results show that, contrary to state-of-the-art metrics, the proposed metric reliably discriminates desirable trajectories from adversarial ones.</p>
       <p>This is the companion page for the paper: Sobolev Norms in Neural Embeddings Measure Audio Morphing Regularity</p>
       <p>Experiment code is available in <a href="https://github.com/TheoChasleCauchy/paperSobolevMorphingMetric">this GitHub repository</a>.</p>
     </div>
@@ -317,32 +316,32 @@
             <p>log(ω) = 3.40, τ = 0.34, log(p) = 0.30, log(D) = -1.43, α = 0.32</p>
         </div>
 
-        <h3>Ref and Null</h3>
+        <h3>LUM and Null</h3>
 
         <figure class="text-center">
-            <img src="companion_page_resources/images/ref_and_null_trajectories.jpg">
+            <img src="companion_page_resources/images/lum_and_null_trajectories.jpg">
         </figure>
 
         <div class="trajectory-example">
-        <h4>Listening to a Reference trajectory</h4>
-        <p>Reference trajectories are synthesized with a regularly sampled linear interpolation between anchors' log(p) values (other parameters have the same values between <i>s</i> and <i>t</i>).</p>
+        <h4>Listening to a Linear and Uniform Morphing (LUM) trajectory</h4>
+        <p>LUM trajectories are synthesized with a regularly sampled linear interpolation between anchors' log(p) values (other parameters have the same values between <i>s</i> and <i>t</i>).</p>
         <p class="center">
             To listen to the anchors s and t and the sounds of the morphing trajectory, click on the circles below:
         </p>
-        <div class="circles-line trajectory-ref">
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I0.wav">s</button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I1.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I2.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I3.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I4.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I5.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I6.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I7.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I8.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I9.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I10.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I11.wav"></button>
-            <button class="audio-circle" data-audio="companion_page_resources/audios_ref_example/audio_row_1_ST_I12.wav">t</button>
+        <div class="circles-line trajectory-lum">
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I0.wav">s</button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I1.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I2.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I3.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I4.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I5.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I6.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I7.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I8.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I9.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I10.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I11.wav"></button>
+            <button class="audio-circle" data-audio="companion_page_resources/audios_lum_example/audio_row_1_ST_I12.wav">t</button>
         </div>
         <div class="parameter-labels-container">
             <div class="parameter-labels">
