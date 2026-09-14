@@ -87,7 +87,6 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
 
     # Set up model-specific subdirectories
     random_points_embeddings_dir = os.path.join(random_points_embeddings_dir, embedding_model)
-    results_dir = os.path.join(results_dir, embedding_model)
     os.makedirs(trajectories_embeddings_dir, exist_ok=True)
     os.makedirs(results_dir, exist_ok=True)
 

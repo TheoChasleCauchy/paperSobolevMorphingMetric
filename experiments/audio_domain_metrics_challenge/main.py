@@ -210,17 +210,9 @@ def main():
     compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
     compute_smoothness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
 
-    # model_name = "MFCC"
-    # compute_correspondence_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audio_dir)
-
     model_name = "LaionCLAP_audio"
     embeddings_dir = f"data/generated/embeddings/embeddings_eqc_trajectories/{model_name}"
     compute_smoothness_mf(results_dir, model_name, trajectories, embeddings_folder=embeddings_dir)
-
-    # model_name = "CDPAM"
-    # compute_cdpam(results_dir, trajectories, audios_or_embeddings_folder=audio_dir)
-    # compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audio_dir)
-    # compute_smoothness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audio_dir)
 
     # ----------------------------------------
     #                Make table              -
