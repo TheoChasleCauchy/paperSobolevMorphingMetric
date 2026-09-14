@@ -17,7 +17,7 @@ embeddings_sizes = {
 
 def sobolev_distance(k: int, p: int, f, g, alpha_values):
     """
-    Computes the Sobolev distance between two embeddings.
+    Computes the Sobolev distance between two lists of embeddings.
 
     Args:
         k (int): Order of the Sobolev space.
@@ -70,14 +70,14 @@ def sobolev_distance(k: int, p: int, f, g, alpha_values):
 
     return dist.item()
 
-def compute_sobolev_distances(embeddings_folder, results_dir, model_name, trajectories, num_intermediate_samples):
+def compute_sdim(embeddings_folder, results_dir, model_name, trajectories, num_intermediate_samples):
 
     # get alpha values to b between 0 and 1
     p_values = torch.tensor(np.linspace(0, 1, num_intermediate_samples+2))
     
     for k, p in [(1, 2), (0, 2)]:
-        sobolev_dists = []
-        for i_traj, trajectory in enumerate(tqdm(trajectories, desc="Computing sobolev distances", total=len(trajectories))):
+        sdim_values = []
+        for i_traj, trajectory in enumerate(tqdm(trajectories, desc="Computing SDIM", total=len(trajectories))):
             morph_embeddings = []
             for i_theta in range(len(trajectory)):
                 embedding = torch.tensor(np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_ST_I{i_theta}.npy")))
@@ -87,18 +87,18 @@ def compute_sobolev_distances(embeddings_folder, results_dir, model_name, trajec
             # Interpolation between vectors
             ideal_morphing = [torch.lerp(morph_embeddings[0], morph_embeddings[-1], p_value) for p_value in p_values]
 
-            sobolev_value = sobolev_distance(k, p, morph_embeddings, ideal_morphing, alpha_values = p_values)
-            sobolev_dists.append(sobolev_value)
+            sdim_value = sobolev_distance(k, p, morph_embeddings, ideal_morphing, alpha_values = p_values)
+            sdim_values.append(sdim_value)
 
-        # Write sobolev values in a csv file
+        # Write SDIM values in a csv file
         results_path = os.path.join(results_dir, model_name)
         os.makedirs(results_path, exist_ok=True)
-        with open(f"{results_path}/{model_name}_sobolev_dists_{k}_{p}.csv", "w", newline="") as csvfile:
+        with open(f"{results_path}/{model_name}_sdim_values_{k}_{p}.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(["Row", "Sobolev Distance"])
-            for i, value in enumerate(sobolev_dists):
+            writer.writerow(["Row", "SDIM"])
+            for i, value in enumerate(sdim_values):
                 writer.writerow([i, value])
-            writer.writerow(["Mean Sobolev Distance", f"{np.mean(sobolev_dists)} +- {np.std(sobolev_dists)}"])
+            writer.writerow(["Mean SDIM", f"{np.mean(sdim_values)} +- {np.std(sdim_values)}"])
             
 def make_table(results_dir, models):
     import re
@@ -109,12 +109,12 @@ def make_table(results_dir, models):
     table_data = {}
 
     for k, p in [(1, 2), (0, 2)]:
-        row_key = f"$S_Ref ({k}, {p}) / S_Null ({k}, {p}) \downarrow$"
+        row_key = f"$S_LUM ({k}, {p}) / S_Null ({k}, {p}) \downarrow$"
         table_data[row_key] = {}
 
         for model_name in models:
             # Get metric value of null config
-            null_csv_path = os.path.join(results_dir, "results_null_trajectories", model_name, f"{model_name}_sobolev_dists_{k}_{p}.csv")
+            null_csv_path = os.path.join(results_dir, "results_null_trajectories", model_name, f"{model_name}_sdim_values_{k}_{p}.csv")
             if os.path.exists(null_csv_path):
                 with open(null_csv_path, "r") as csvfile:
                     reader = csv.reader(csvfile)
@@ -127,7 +127,7 @@ def make_table(results_dir, models):
                 raise FileNotFoundError(f"File not found: {null_csv_path}")
 
             # Get metric value
-            csv_path = os.path.join(results_dir, "results_ref_trajectories", model_name, f"{model_name}_sobolev_dists_{k}_{p}.csv")
+            csv_path = os.path.join(results_dir, "results_lum_trajectories", model_name, f"{model_name}_sdim_values_{k}_{p}.csv")
             with open(csv_path, "r") as csvfile:
                 reader = csv.reader(csvfile)
                 rows = list(reader)
@@ -148,13 +148,13 @@ def make_table(results_dir, models):
         writer = csv.writer(csvfile)
 
         # Write header: models as rows
-        header = ["Model", "$S_Ref (0, 2) / S_Null (0, 2) \downarrow$", "$S_Ref (1, 2) / S_Null (1, 2) \downarrow$"]
+        header = ["Model", "$S_LUM (0, 2) / S_Null (0, 2) \downarrow$", "$S_LUM (1, 2) / S_Null (1, 2) \downarrow$"]
         writer.writerow(header)
 
         # Write rows: models as rows, (k, p) as columns, mean+-std as values
         for model_name in models:
             row = [model_name]
             for k, p in [(0, 2), (1, 2)]:
-                row.append(table_data[f"$S_Ref ({k}, {p}) / S_Null ({k}, {p}) \downarrow$"][model_name])
+                row.append(table_data[f"$S_LUM ({k}, {p}) / S_Null ({k}, {p}) \downarrow$"][model_name])
             writer.writerow(row)
     print(f"Embeddings Regularity table generated at {output_csv_path}.")

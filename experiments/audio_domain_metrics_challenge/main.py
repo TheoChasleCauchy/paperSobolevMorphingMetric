@@ -7,7 +7,7 @@ import yaml
 from compute_embeddings import compute_trajectories_embeddings
 from synthesize_audios import synthesize_audios_trajectories
 
-from sobolev_distance import compute_sobolev_distances
+from sdim import compute_sdim
 from smoothness_mf import compute_smoothness_mf
 from correpondence_sm import compute_correspondence_sm
 from compute_cdpam import compute_cdpam
@@ -65,7 +65,6 @@ def main():
     model_name = "MERT_v1-330M"
     embeddings_dir = f"data/generated/embeddings/embeddings_null_trajectories/{model_name}"
 
-    # compute_sobolev_distances(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
     compute_smoothness_mf(results_dir, model_name, trajectories, embeddings_folder=embeddings_dir)
     compute_correspondence_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
     compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
@@ -85,39 +84,38 @@ def main():
     compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audios_dir)
     compute_smoothness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audios_dir)
 
-    # --------------------------------------------------------
-    #          Compute experiments ref points              -
-    # --------------------------------------------------------
+    # ------------------------------------------------------
+    #          Compute experiments LUM points              -
+    # ------------------------------------------------------
 
-    print("Computing metrics on ref trajectories..")
+    print("Computing metrics on lum trajectories..")
 
     ## Load trajectories
-    print(f"Loading ref trajectories")
-    trajectories_path = "data/generated/parameters/parameters_ref_trajectories.csv"
+    print(f"Loading lum trajectories")
+    trajectories_path = "data/generated/parameters/parameters_lum_trajectories.csv"
     trajectories = load_trajectories_from_csv(trajectories_path)
 
     ## Compute metrics
-    results_dir = f"data/results/results_ref_trajectories/"
+    results_dir = f"data/results/results_lum_trajectories/"
     os.makedirs(results_dir, exist_ok=True)
 
     model_name = "MERT_v1-330M"
-    embeddings_dir = f"data/generated/embeddings/embeddings_ref_trajectories/{model_name}"
-    # compute_sobolev_distances(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
+    embeddings_dir = f"data/generated/embeddings/embeddings_lum_trajectories/{model_name}"
     compute_smoothness_mf(results_dir, model_name, trajectories, embeddings_folder=embeddings_dir)
     compute_correspondence_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
     compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
     compute_smoothness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
 
     model_name = "MFCC"
-    audios_dir = f"data/generated/audios/audios_ref_trajectories"
+    audios_dir = f"data/generated/audios/audios_lum_trajectories"
     compute_correspondence_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audios_dir)
 
     model_name = "LaionCLAP_audio"
-    embeddings_dir = f"data/generated/embeddings/embeddings_ref_trajectories/{model_name}"
+    embeddings_dir = f"data/generated/embeddings/embeddings_lum_trajectories/{model_name}"
     compute_smoothness_mf(results_dir, model_name, trajectories, embeddings_folder=embeddings_dir)
 
     model_name = "CDPAM"
-    audios_dir = f"data/generated/audios/audios_ref_trajectories"
+    audios_dir = f"data/generated/audios/audios_lum_trajectories"
     compute_cdpam(results_dir, trajectories, audios_or_embeddings_folder=audios_dir)
     compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audios_dir)
     compute_smoothness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=audios_dir)
@@ -147,7 +145,7 @@ def main():
     results_dir = f"data/results/results_nuc_trajectories/"
     model_name = "MERT_v1-330M"
     embeddings_dir = f"data/generated/embeddings/embeddings_nuc_trajectories/{model_name}"
-    compute_sobolev_distances(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
+    compute_sdim(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
     compute_smoothness_mf(results_dir, model_name, trajectories, embeddings_folder=embeddings_dir)
     compute_correspondence_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
     compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
@@ -196,7 +194,7 @@ def main():
         trajectories_filepath = get_eqc_intermediate_embeddings_from_random_sampling(
             embedding_model=model_name, num_intermediate_samples=num_intermediate_samples,
             anchors_couples_parameters_filepath="data/generated/parameters/parameters_anchors_couples.csv",
-            ref_points_embeddings_dir=f"data/generated/embeddings/embeddings_ref_trajectories/{model_name}",
+            lum_points_embeddings_dir=f"data/generated/embeddings/embeddings_lum_trajectories/{model_name}",
             random_points_embeddings_dir="data/generated/embeddings/embeddings_random_sampling",
             trajectories_embeddings_dir=f"data/generated/embeddings/embeddings_eqc_trajectories/{model_name}",
             results_dir=f"data/results/results_eqc_trajectories/{model_name}")
@@ -206,7 +204,7 @@ def main():
     results_dir = f"data/results/results_eqc_trajectories/"
     model_name = "MERT_v1-330M"
     embeddings_dir = f"data/generated/embeddings/embeddings_eqc_trajectories/{model_name}"
-    compute_sobolev_distances(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
+    compute_sdim(embeddings_dir, results_dir, model_name, trajectories, num_intermediate_samples)
     compute_smoothness_mf(results_dir, model_name, trajectories, embeddings_folder=embeddings_dir)
     compute_correspondence_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)
     compute_intermediateness_sm(results_dir, model_name, trajectories, audios_or_embeddings_folder=embeddings_dir)

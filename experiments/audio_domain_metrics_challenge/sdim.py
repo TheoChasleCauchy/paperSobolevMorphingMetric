@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 def sobolev_distance(k: int, p: int, f, g, alpha_values):
     """
-    Computes the Sobolev distance between two embeddings.
+    Computes the Sobolev distance between two lists of embeddings.
 
     Args:
         k (int): Order of the Sobolev space.
@@ -59,14 +59,14 @@ def sobolev_distance(k: int, p: int, f, g, alpha_values):
 
     return dist.item()
 
-def compute_sobolev_distances(embeddings_folder, results_dir, model_name, trajectories, num_intermediate_samples):
+def compute_sdim(embeddings_folder, results_dir, model_name, trajectories, num_intermediate_samples):
 
     # get alpha values to b between 0 and 1
     p_values = torch.tensor(np.linspace(0, 1, num_intermediate_samples+2))
     
     for k, p in [(1, 2), (0, 2)]:
-        sobolev_dists = []
-        for i_traj, trajectory in enumerate(tqdm(trajectories, desc=f"Computing Sobolev distance (k={k}, p={p})", total=len(trajectories))):
+        sdim_values = []
+        for i_traj, trajectory in enumerate(tqdm(trajectories, desc=f"Computing SDIM (k={k}, p={p})", total=len(trajectories))):
             morph_embeddings = []
             for i_theta in range(len(trajectory)):
                 embedding = torch.tensor(np.load(os.path.join(embeddings_folder, f"embedding_{model_name}_row_{i_traj}_ST_I{i_theta}.npy")))
@@ -76,15 +76,15 @@ def compute_sobolev_distances(embeddings_folder, results_dir, model_name, trajec
             # Interpolation between vectors
             ideal_morphing = [torch.lerp(morph_embeddings[0], morph_embeddings[-1], p_value) for p_value in p_values]
 
-            sobolev_value = sobolev_distance(k, p, morph_embeddings, ideal_morphing, alpha_values = p_values)
-            sobolev_dists.append(sobolev_value)
+            sdim_value = sobolev_distance(k, p, morph_embeddings, ideal_morphing, alpha_values = p_values)
+            sdim_values.append(sdim_value)
 
-        # Write sobolev values in a csv file
+        # Write SDIM values in a csv file
         results_path = os.path.join(results_dir, model_name)
         os.makedirs(results_path, exist_ok=True)
-        with open(os.path.join(results_path, f"{model_name}_sobolev_dists_{k}_{p}.csv"), "w", newline="") as csvfile:
+        with open(os.path.join(results_path, f"{model_name}_sdim_values_{k}_{p}.csv"), "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(["Row", "Sobolev Distance"])
-            for i, value in enumerate(sobolev_dists):
+            writer.writerow(["Row", "SDIM"])
+            for i, value in enumerate(sdim_values):
                 writer.writerow([i, value])
-            writer.writerow(["Mean Sobolev Distance", f"{np.mean(sobolev_dists)} +- {np.std(sobolev_dists)}"])
+            writer.writerow(["Mean SDIM", f"{np.mean(sdim_values)} +- {np.std(sdim_values)}"])

@@ -80,7 +80,7 @@ def load_and_extract_couples(csv_file_path: str) -> List[Tuple[List[float], List
 
     return couples
 
-def generate_and_save_ref_trajectories(seed, points_couples_filename: str, num_intermediate_samples: int, filename: str):
+def generate_and_save_lum_trajectories(seed, points_couples_filename: str, num_intermediate_samples: int, filename: str):
 
     # random.seed(seed)
     os.makedirs(os.path.dirname(filename), exist_ok=True)

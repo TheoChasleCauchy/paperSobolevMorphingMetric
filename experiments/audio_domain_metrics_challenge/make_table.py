@@ -26,25 +26,25 @@ def make_table(results_dir):
             mean_smoothness_clap_corr, std_smoothness_clap_corr = map(float, mean_std_clap)
             metrics_values["MERT Smoothness MF"] = (mean_smoothness_clap_corr, std_smoothness_clap_corr)
         
-        # Get Sobolev k=0, p=2 value
-        sobolev_k0_p2_csv_path = os.path.join(results_dir, "MERT_v1-330M", "MERT_v1-330M_sobolev_dists_0_2.csv")
-        with open(sobolev_k0_p2_csv_path, 'r') as f:
+        # Get SDIM k=0, p=2 value
+        sdim_k0_p2_csv_path = os.path.join(results_dir, "MERT_v1-330M", "MERT_v1-330M_sdim_values_0_2.csv")
+        with open(sdim_k0_p2_csv_path, 'r') as f:
             reader = list(csv.reader(f))
             row = reader[-1] # Get the last row where the mean value is
             value_string = row[1]
-            mean_std_sobolev_k0_p2 = re.findall(r"[-+]?\d*\.\d+(?:[eE][-+]?\d+)?", value_string)
-            mean_sobolev_k0_p2, std_sobolev_k0_p2 = map(float, mean_std_sobolev_k0_p2)
-            metrics_values["Sobolev (0, 2)"] = (mean_sobolev_k0_p2, std_sobolev_k0_p2)
+            mean_std_sdim_k0_p2 = re.findall(r"[-+]?\d*\.\d+(?:[eE][-+]?\d+)?", value_string)
+            mean_sdim_k0_p2, std_sdim_k0_p2 = map(float, mean_std_sdim_k0_p2)
+            metrics_values["SDIM (0, 2)"] = (mean_sdim_k0_p2, std_sdim_k0_p2)
         
-        # Get Sobolev k=1, p=2 value
-        sobolev_k1_p2_csv_path = os.path.join(results_dir, "MERT_v1-330M", "MERT_v1-330M_sobolev_dists_1_2.csv")
-        with open(sobolev_k1_p2_csv_path, 'r') as f:
+        # Get SDIM k=1, p=2 value
+        sdim_k1_p2_csv_path = os.path.join(results_dir, "MERT_v1-330M", "MERT_v1-330M_sdim_values_1_2.csv")
+        with open(sdim_k1_p2_csv_path, 'r') as f:
             reader = list(csv.reader(f))
             row = reader[-1] # Get the last row where the mean value is
             value_string = row[1]
-            mean_std_sobolev_k1_p2 = re.findall(r"[-+]?\d*\.\d+(?:[eE][-+]?\d+)?", value_string)
-            mean_sobolev_k1_p2, std_sobolev_k1_p2 = map(float, mean_std_sobolev_k1_p2)
-            metrics_values["Sobolev (1, 2)"] = (mean_sobolev_k1_p2, std_sobolev_k1_p2)
+            mean_std_sdim_k1_p2 = re.findall(r"[-+]?\d*\.\d+(?:[eE][-+]?\d+)?", value_string)
+            mean_sdim_k1_p2, std_sdim_k1_p2 = map(float, mean_std_sdim_k1_p2)
+            metrics_values["SDIM (1, 2)"] = (mean_sdim_k1_p2, std_sdim_k1_p2)
         
         # Get Correspondence value
         if not no_audio:
@@ -108,8 +108,8 @@ def make_table(results_dir):
         
         return metrics_values
     
-    results_dir_ref = f"{results_dir}/results_ref_trajectories"
-    ref_metrics_values = get_metrics_values(results_dir_ref)
+    results_dir_lum = f"{results_dir}/results_lum_trajectories"
+    lum_metrics_values = get_metrics_values(results_dir_lum)
     results_dir_null = f"{results_dir}/results_null_trajectories"
     null_metrics_values = get_metrics_values(results_dir_null)
         
@@ -124,14 +124,14 @@ def make_table(results_dir):
         writer = csv.writer(csvfile)
 
         # Write header: metrics as rows
-        header = ["Metric", "Encoder", "Ref", "NUC", "EQC",  "Null"]
+        header = ["Metric", "Encoder", "LUM", "NUC", "EQC",  "Null"]
         writer.writerow(header)
 
         # Write rows: models as rows, (k, p) as columns, mean+-std as values
         row = [
             "Correspondence SM", 
             "MFCC",
-            f"{ref_metrics_values['MFCC Correspondence SM'][0]:.2f} ({ref_metrics_values['MFCC Correspondence SM'][1]:.2f})",
+            f"{lum_metrics_values['MFCC Correspondence SM'][0]:.2f} ({lum_metrics_values['MFCC Correspondence SM'][1]:.2f})",
             f"{nuc_metrics_values['MFCC Correspondence SM'][0]:.2f} ({nuc_metrics_values['MFCC Correspondence SM'][1]:.2f})",
             f"",
             f"{null_metrics_values['MFCC Correspondence SM'][0]:.2f} ({null_metrics_values['MFCC Correspondence SM'][1]:.2f})",
@@ -140,7 +140,7 @@ def make_table(results_dir):
         row = [
             "Smoothness MF",
             "L-CLAP audio",
-            f"{ref_metrics_values['CLAP Smoothness MF'][0]:.2f} ({ref_metrics_values['CLAP Smoothness MF'][1]:.2f})",
+            f"{lum_metrics_values['CLAP Smoothness MF'][0]:.2f} ({lum_metrics_values['CLAP Smoothness MF'][1]:.2f})",
             f"{nuc_metrics_values['CLAP Smoothness MF'][0]:.2f} ({nuc_metrics_values['CLAP Smoothness MF'][1]:.2f})",
             f"{eqc_metrics_values['CLAP Smoothness MF'][0]:.2f} ({eqc_metrics_values['CLAP Smoothness MF'][1]:.2f})",
             f"{null_metrics_values['CLAP Smoothness MF'][0]:.2f} ({null_metrics_values['CLAP Smoothness MF'][1]:.2f})",
@@ -149,7 +149,7 @@ def make_table(results_dir):
         row = [
             "Intermediateness SM",
             "CDPAM",
-            f"{ref_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({ref_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
+            f"{lum_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({lum_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
             f"",
             f"{null_metrics_values['CDPAM Intermediateness SM'][0]:.2f} ({null_metrics_values['CDPAM Intermediateness SM'][1]:.2f})",
@@ -158,7 +158,7 @@ def make_table(results_dir):
         row = [
             "Smoothness SM",
             "CDPAM",
-            f"{ref_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({ref_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
+            f"{lum_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({lum_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
             f"{nuc_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({nuc_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
             f"",
             f"{null_metrics_values['CDPAM Smoothness SM'][0]:.2f} ({null_metrics_values['CDPAM Smoothness SM'][1]:.2f})",
@@ -169,7 +169,7 @@ def make_table(results_dir):
         row = [
             "Correspondence SM", 
             "MERT",
-            f"{ref_metrics_values['MERT Correspondence SM'][0]:.2f} ({ref_metrics_values['MERT Correspondence SM'][1]:.2f})",
+            f"{lum_metrics_values['MERT Correspondence SM'][0]:.2f} ({lum_metrics_values['MERT Correspondence SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Correspondence SM'][0]:.2f} ({nuc_metrics_values['MERT Correspondence SM'][1]:.2f})",
             f"{eqc_metrics_values['MERT Correspondence SM'][0]:.2f} ({eqc_metrics_values['MERT Correspondence SM'][1]:.2f})",
             f"{null_metrics_values['MERT Correspondence SM'][0]:.2f} ({null_metrics_values['MERT Correspondence SM'][1]:.2f})",
@@ -178,7 +178,7 @@ def make_table(results_dir):
         row = [
             "Smoothness MF",
             "MERT",
-            f"{ref_metrics_values['MERT Smoothness MF'][0]:.2f} ({ref_metrics_values['MERT Smoothness MF'][1]:.2f})",
+            f"{lum_metrics_values['MERT Smoothness MF'][0]:.2f} ({lum_metrics_values['MERT Smoothness MF'][1]:.2f})",
             f"{nuc_metrics_values['MERT Smoothness MF'][0]:.2f} ({nuc_metrics_values['MERT Smoothness MF'][1]:.2f})",
             f"{eqc_metrics_values['MERT Smoothness MF'][0]:.2f} ({eqc_metrics_values['MERT Smoothness MF'][1]:.2f})",
             f"{null_metrics_values['MERT Smoothness MF'][0]:.2f} ({null_metrics_values['MERT Smoothness MF'][1]:.2f})",
@@ -187,7 +187,7 @@ def make_table(results_dir):
         row = [
             "Intermediateness SM",
             "MERT",
-            f"{ref_metrics_values['MERT Intermediateness SM'][0]:.2f} ({ref_metrics_values['MERT Intermediateness SM'][1]:.2f})",
+            f"{lum_metrics_values['MERT Intermediateness SM'][0]:.2f} ({lum_metrics_values['MERT Intermediateness SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Intermediateness SM'][0]:.2f} ({nuc_metrics_values['MERT Intermediateness SM'][1]:.2f})",
             f"{eqc_metrics_values['MERT Intermediateness SM'][0]:.2f} ({eqc_metrics_values['MERT Intermediateness SM'][1]:.2f})",
             f"{null_metrics_values['MERT Intermediateness SM'][0]:.2f} ({null_metrics_values['MERT Intermediateness SM'][1]:.2f})",
@@ -196,28 +196,28 @@ def make_table(results_dir):
         row = [
             "Smoothness SM",
             "MERT",
-            f"{ref_metrics_values['MERT Smoothness SM'][0]:.2f} ({ref_metrics_values['MERT Smoothness SM'][1]:.2f})",
+            f"{lum_metrics_values['MERT Smoothness SM'][0]:.2f} ({lum_metrics_values['MERT Smoothness SM'][1]:.2f})",
             f"{nuc_metrics_values['MERT Smoothness SM'][0]:.2f} ({nuc_metrics_values['MERT Smoothness SM'][1]:.2f})",
             f"{eqc_metrics_values['MERT Smoothness SM'][0]:.2f} ({eqc_metrics_values['MERT Smoothness SM'][1]:.2f})",
             f"{null_metrics_values['MERT Smoothness SM'][0]:.2f} ({null_metrics_values['MERT Smoothness SM'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
-            "Sobolev (0, 2)",
+            "SDIM (0, 2)",
             "MERT",
-            f"{ref_metrics_values['Sobolev (0, 2)'][0]:.2f} ({ref_metrics_values['Sobolev (0, 2)'][1]:.2f})",
-            f"{nuc_metrics_values['Sobolev (0, 2)'][0]:.2f} ({nuc_metrics_values['Sobolev (0, 2)'][1]:.2f})",
-            f"{eqc_metrics_values['Sobolev (0, 2)'][0]:.2f} ({eqc_metrics_values['Sobolev (0, 2)'][1]:.2f})",
-            f"{null_metrics_values['Sobolev (0, 2)'][0]:.2f} ({null_metrics_values['Sobolev (0, 2)'][1]:.2f})",
+            f"{lum_metrics_values['SDIM (0, 2)'][0]:.2f} ({lum_metrics_values['SDIM (0, 2)'][1]:.2f})",
+            f"{nuc_metrics_values['SDIM (0, 2)'][0]:.2f} ({nuc_metrics_values['SDIM (0, 2)'][1]:.2f})",
+            f"{eqc_metrics_values['SDIM (0, 2)'][0]:.2f} ({eqc_metrics_values['SDIM (0, 2)'][1]:.2f})",
+            f"{null_metrics_values['SDIM (0, 2)'][0]:.2f} ({null_metrics_values['SDIM (0, 2)'][1]:.2f})",
         ]
         writer.writerow(row)
         row = [
-            "Sobolev (1, 2)",
+            "SDIM (1, 2)",
             "MERT",
-            f"{ref_metrics_values['Sobolev (1, 2)'][0]:.2f} ({ref_metrics_values['Sobolev (1, 2)'][1]:.2f})",
-            f"{nuc_metrics_values['Sobolev (1, 2)'][0]:.2f} ({nuc_metrics_values['Sobolev (1, 2)'][1]:.2f})",
-            f"{eqc_metrics_values['Sobolev (1, 2)'][0]:.2f} ({eqc_metrics_values['Sobolev (1, 2)'][1]:.2f})",
-            f"{null_metrics_values['Sobolev (1, 2)'][0]:.2f} ({null_metrics_values['Sobolev (1, 2)'][1]:.2f})",
+            f"{lum_metrics_values['SDIM (1, 2)'][0]:.2f} ({lum_metrics_values['SDIM (1, 2)'][1]:.2f})",
+            f"{nuc_metrics_values['SDIM (1, 2)'][0]:.2f} ({nuc_metrics_values['SDIM (1, 2)'][1]:.2f})",
+            f"{eqc_metrics_values['SDIM (1, 2)'][0]:.2f} ({eqc_metrics_values['SDIM (1, 2)'][1]:.2f})",
+            f"{null_metrics_values['SDIM (1, 2)'][0]:.2f} ({null_metrics_values['SDIM (1, 2)'][1]:.2f})",
         ]
         writer.writerow(row)
 

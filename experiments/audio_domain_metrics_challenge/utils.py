@@ -61,7 +61,7 @@ def compute_nuc_intermediate_points(num_intermediate_samples, parameters_couples
 
 def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_intermediate_samples,
                                            anchors_couples_parameters_filepath,
-                                           ref_points_embeddings_dir,
+                                           lum_points_embeddings_dir,
                                            random_points_embeddings_dir,
                                            trajectories_embeddings_dir,
                                            results_dir):
@@ -74,7 +74,7 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
         embedding_model: Name identifier for the embedding model
         num_intermediate_samples: Number of intermediate points between each S-T couple
         anchors_couples_parameters_filepath: Path to the CSV file containing anchor couples parameters
-        ref_points_embeddings_dir: Base directory containing embedding points for each couple
+        lum_points_embeddings_dir: Base directory containing embedding points for each couple
         random_points_embeddings_dir: Base directory containing random embedding points
         trajectories_embeddings_dir: Base directory to save generated trajectory embeddings
         results_dir: Base directory to save results
@@ -128,9 +128,9 @@ def get_eqc_intermediate_embeddings_from_random_sampling(embedding_model, num_in
 
     for i_couple in tqdm(range(len(couples)), desc=f"Computing embeddings EQC trajectories"):
         # Copy endpoint S (I0) and T (I{num_intermediate_samples+1}) to trajectories directory
-        s_filepath = os.path.join(ref_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_ST_I0.npy")
+        s_filepath = os.path.join(lum_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_ST_I0.npy")
         shutil.copy(s_filepath, trajectories_embeddings_dir)
-        t_filepath = os.path.join(ref_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_ST_I{num_intermediate_samples+1}.npy")
+        t_filepath = os.path.join(lum_points_embeddings_dir, f"embedding_{embedding_model}_row_{i_couple}_ST_I{num_intermediate_samples+1}.npy")
         shutil.copy(t_filepath, trajectories_embeddings_dir)
 
         # Load endpoint embeddings
